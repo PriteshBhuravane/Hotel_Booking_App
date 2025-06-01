@@ -29,11 +29,13 @@ const Navbar = () => {
       setIsScrolled(window.scrollY > 10);
     };
   
-    // Run once to set correct state on mount
-    handleScroll();
-  
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    if (location.pathname === "/") {
+      setIsScrolled(window.scrollY > 10); // set initial scroll state
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    } else {
+      setIsScrolled(true); // Always scrolled for non-home pages
+    }
   }, [location.pathname]);
   
 
